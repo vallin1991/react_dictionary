@@ -5,6 +5,15 @@ const Definitions =({ word, category, meanings}) => {
     return (
 
         <div className="meanings">
+            {
+                meanings[0] && word && category==="en" && (
+                    <audio 
+                    src={meanings[0].phonetics[0] && meanings[0].phonetics[0].audio}
+                    style={{backgroundColor:"#fff", borderRadius: 10}}>
+                        Your Browser doesnt't support audio element.
+                    </audio>
+                )
+            }
 
             {word===""? (
             <span className="subTitle">Start by typing a word in Search</span>
@@ -17,6 +26,21 @@ const Definitions =({ word, category, meanings}) => {
                     style={{ backgroundColor: "white", color:"black"}}
                     >
                         <b>{def.definition}</b>
+                        <hr style={{ background: "black", width: "100%"}}/>
+                        
+                            {def.example && (
+                                <span>
+                                    <b>Example : </b>
+                                    {def.example}
+                                </span>
+                            )}
+                            {def.synonyms && (
+                                <span>
+                                    <b>Synonyms :</b>
+                                    {def.synonyms.map((s)=>`${s},`)}
+                                </span>
+                            )}
+                        
                  </div>
                 )))
             ))}
